@@ -18,7 +18,7 @@ local function loadKey()
 end
 
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "🐸"
+gui.Name = "CyberFrog"
 gui.ResetOnSpawn = false
 
 local mainFrame = Instance.new("Frame", gui)
@@ -144,14 +144,6 @@ submitBtn.Font = Enum.Font.GothamBold
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 100)
 submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 10)
-
--- 🟢 AUTO LOGIN (jika key == "admin")
-local lastKey = loadKey()
-if lastKey and lastKey == "admin" then
-    print("Auto login berhasil, key valid:", lastKey)
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
-end
 
 -- 🟢 TOMBOL SUBMIT
 submitBtn.MouseButton1Click:Connect(function()
