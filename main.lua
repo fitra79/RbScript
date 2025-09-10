@@ -150,7 +150,7 @@ local lastKey = loadKey()
 if lastKey and lastKey == "admin" then
     print("Auto login berhasil, key valid:", lastKey)
     mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/listMenu.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
 end
 
 -- 🟢 TOMBOL SUBMIT
@@ -160,8 +160,12 @@ submitBtn.MouseButton1Click:Connect(function()
         print("Key valid: Access granted")
         saveKey(key)
         mainFrame.Visible = false
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/listMenu.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
     else
         print("Key invalid:", key)
     end
 end)
+
+
+
+
