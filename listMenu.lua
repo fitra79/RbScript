@@ -124,17 +124,6 @@ iconBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = true
 end)
 
-local keyBox = Instance.new("TextBox", mainFrame)
-keyBox.Size = UDim2.new(0.8, 0, 0, 40)
-keyBox.Position = UDim2.new(0.1, 0, 0.35, 0)
-keyBox.PlaceholderText = "Enter your key..."
-keyBox.Text = ""
-keyBox.TextSize = 18
-keyBox.Font = Enum.Font.Gotham
-keyBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-keyBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
-
 local submitBtn = Instance.new("TextButton", mainFrame)
 submitBtn.Size = UDim2.new(0.5, 0, 0, 35)
 submitBtn.Position = UDim2.new(0.25, 0, 0.55, 0)
@@ -144,24 +133,3 @@ submitBtn.Font = Enum.Font.GothamBold
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 100)
 submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 10)
-
--- 🟢 AUTO LOGIN (jika key == "admin")
-local lastKey = loadKey()
-if lastKey and lastKey == "admin" then
-    print("Auto login berhasil, key valid:", lastKey)
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/listMenu.lua"))()
-end
-
--- 🟢 TOMBOL SUBMIT
-submitBtn.MouseButton1Click:Connect(function()
-    local key = keyBox.Text
-    if key == "admin" then
-        print("Key valid: Access granted")
-        saveKey(key)
-        mainFrame.Visible = false
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/listMenu.lua"))()
-    else
-        print("Key invalid:", key)
-    end
-end)
