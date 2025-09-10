@@ -181,34 +181,6 @@ submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
 local submitCorner = Instance.new("UICorner", submitBtn)
 submitCorner.CornerRadius = UDim.new(0, 10)
 
-
-local buyKeyLabel = Instance.new("TextLabel", mainFrame)
-buyKeyLabel.Size = UDim2.new(1, 0, 0, 30)
-buyKeyLabel.Position = UDim2.new(0, 0, 0.75, 0)
-buyKeyLabel.Text = "Beli Key di Discord 💻"
-buyKeyLabel.TextSize = 16
-buyKeyLabel.Font = Enum.Font.GothamBold
-buyKeyLabel.TextColor3 = Color3.fromRGB(255,255,255)
-buyKeyLabel.BackgroundTransparency = 1
-local buyStroke = Instance.new("UIStroke", buyKeyLabel)
-buyStroke.Thickness = 1
-buyStroke.Color = Color3.fromRGB(0,0,0)
-
-
-local discordBtn = Instance.new("TextButton", mainFrame)
-discordBtn.Size = UDim2.new(0, 100, 0, 30)
-discordBtn.Position = UDim2.new(0, 10, 1, -40)
-discordBtn.Text = "Discord"
-discordBtn.TextSize = 16
-discordBtn.Font = Enum.Font.GothamBold
-discordBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-discordBtn.TextColor3 = Color3.fromRGB(255,255,255)
-local discCorner = Instance.new("UICorner", discordBtn)
-discCorner.CornerRadius = UDim.new(0, 8)
-discordBtn.MouseButton1Click:Connect(function()
-    setclipboard("https://discord.gg/tfNqRQsqHK")
-end)
-
 -- ==============================
 
 -- ==============================
