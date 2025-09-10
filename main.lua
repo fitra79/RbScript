@@ -59,7 +59,7 @@ titleBar.BackgroundTransparency = 1
 
 local title = Instance.new("TextLabel", titleBar)
 title.Size = UDim2.new(1, 0, 1, 0)
-title.Text = "WataX Key 🔑"
+title.Text = "CyberFrog 🐸"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 20
 title.Font = Enum.Font.GothamBold
