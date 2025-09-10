@@ -1,32 +1,24 @@
+-- Loader Key UI
+
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
-local saveFile = "WataX_Key.txt"
-
-local function saveKey(k)
-    writefile(saveFile, k)
-end
-
-local function loadKey()
-    if isfile(saveFile) then
-        return readfile(saveFile)
-    else
-        return nil
-    end
-end
 
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "🐸"
+gui.Name = "CyberFrog"
 gui.ResetOnSpawn = false
+
 
 local mainFrame = Instance.new("Frame", gui)
 mainFrame.Size = UDim2.new(0, 400, 0, 250)
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
 mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 mainFrame.BorderSizePixel = 0
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 15)
+local corner = Instance.new("UICorner", mainFrame)
+corner.CornerRadius = UDim.new(0, 15)
+
 
 local gradient = Instance.new("UIGradient", mainFrame)
 gradient.Color = ColorSequence.new{
@@ -34,6 +26,7 @@ gradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 104, 238))
 }
 gradient.Rotation = 45
+
 
 local titleBar = Instance.new("Frame", mainFrame)
 titleBar.Size = UDim2.new(1, 0, 0, 35)
@@ -46,7 +39,11 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 20
 title.Font = Enum.Font.GothamBold
 title.BackgroundTransparency = 1
-Instance.new("UIStroke", title).Thickness = 1.2
+
+local titleStroke = Instance.new("UIStroke", title)
+titleStroke.Thickness = 1.2
+titleStroke.Color = Color3.fromRGB(0, 0, 0)
+
 
 local closeBtn = Instance.new("TextButton", titleBar)
 closeBtn.Size = UDim2.new(0, 30, 0, 30)
@@ -56,10 +53,12 @@ closeBtn.TextSize = 18
 closeBtn.Font = Enum.Font.GothamBold
 closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+local closeCorner = Instance.new("UICorner", closeBtn)
+closeCorner.CornerRadius = UDim.new(0, 6)
 closeBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
+
 
 local minBtn = Instance.new("TextButton", titleBar)
 minBtn.Size = UDim2.new(0, 30, 0, 30)
@@ -69,7 +68,9 @@ minBtn.TextSize = 22
 minBtn.Font = Enum.Font.GothamBold
 minBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 200)
 minBtn.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 6)
+local minCorner = Instance.new("UICorner", minBtn)
+minCorner.CornerRadius = UDim.new(0, 6)
+
 
 local iconBtn = Instance.new("TextButton", gui)
 iconBtn.Size = UDim2.new(0, 90, 0, 40)
@@ -80,8 +81,13 @@ iconBtn.TextSize = 18
 iconBtn.TextColor3 = Color3.fromRGB(255,255,255)
 iconBtn.Font = Enum.Font.GothamBold
 iconBtn.Visible = false
-Instance.new("UICorner", iconBtn).CornerRadius = UDim.new(0.5, 0)
-Instance.new("UIStroke", iconBtn).Thickness = 1.5
+local iconCorner = Instance.new("UICorner", iconBtn)
+iconCorner.CornerRadius = UDim.new(0.5, 0)
+
+local iconStroke = Instance.new("UIStroke", iconBtn)
+iconStroke.Thickness = 1.5
+iconStroke.Color = Color3.fromRGB(255, 255, 255)
+
 
 local dragging = false
 local dragInput, dragStart, startPos
@@ -93,7 +99,7 @@ local function update(input)
     )
 end
 iconBtn.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = iconBtn.Position
@@ -105,7 +111,7 @@ iconBtn.InputBegan:Connect(function(input)
     end
 end)
 iconBtn.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
 end)
@@ -114,6 +120,7 @@ UIS.InputChanged:Connect(function(input)
         update(input)
     end
 end)
+
 
 minBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
@@ -124,6 +131,19 @@ iconBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = true
 end)
 
+
+local submitFeature1 = Instance.new("TextButton", mainFrame)
+submitFeature1.Size = UDim2.new(0.8, 0, 0, 40)
+submitFeature1.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature1.Text = "Gunung Atin"
+submitFeature1.TextSize = 18
+submitFeature1.Font = Enum.Font.GothamBold
+submitFeature1.TextColor3 = Color3.fromRGB(0, 0, 0)
+submitFeature1.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+local keyCorner = Instance.new("UICorner", submitFeature1)
+keyCorner.CornerRadius = UDim.new(0, 8)
+
+
 local submitBtn = Instance.new("TextButton", mainFrame)
 submitBtn.Size = UDim2.new(0.5, 0, 0, 35)
 submitBtn.Position = UDim2.new(0.25, 0, 0.55, 0)
@@ -132,4 +152,9 @@ submitBtn.TextSize = 18
 submitBtn.Font = Enum.Font.GothamBold
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 100)
 submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 10)
+local submitCorner = Instance.new("UICorner", submitBtn)
+submitCorner.CornerRadius = UDim.new(0, 10)
+
+-- ==============================
+
+-- ==============================
