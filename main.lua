@@ -187,11 +187,7 @@ submitCorner.CornerRadius = UDim.new(0, 10)
 
 submitBtn.MouseButton1Click:Connect(function()
     local inputKey = keyBox.Text
-    if isKeyValid(inputKey) then
-        print("Key benar:", inputKey)
-        mainFrame.Visible = false
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
-    else
-        print("Key salah:", inputKey)
+    mainFrame.Visible = false
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
     end
 end)
