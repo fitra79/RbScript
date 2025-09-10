@@ -141,7 +141,6 @@ submitFeature1.Font = Enum.Font.GothamBold
 submitFeature1.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature1.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 local keyCorner = Instance.new("UICorner", submitFeature1)
-keyCorner.CornerRadius = UDim.new(0, 4)
 
 local submitFeature2 = Instance.new("TextButton", mainFrame)
 submitFeature2.Size = UDim2.new(0.8, 0, 0, 40)
@@ -152,7 +151,6 @@ submitFeature2.Font = Enum.Font.GothamBold
 submitFeature2.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature2.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 local keyCorner = Instance.new("UICorner", submitFeature2)
-keyCorner.CornerRadius = UDim.new(0, 4)
 
 local submitFeature3 = Instance.new("TextButton", mainFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 40)
@@ -163,7 +161,6 @@ submitFeature3.Font = Enum.Font.GothamBold
 submitFeature3.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 local keyCorner = Instance.new("UICorner", submitFeature3)
-keyCorner.CornerRadius = UDim.new(0, 4)
 
 -- ==============================
 
