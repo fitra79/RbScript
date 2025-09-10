@@ -32,7 +32,7 @@ end
 
 
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "WataXLoader"
+gui.Name = "🐸"
 gui.ResetOnSpawn = false
 
 
