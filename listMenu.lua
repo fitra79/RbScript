@@ -144,8 +144,8 @@ local keyCorner = Instance.new("UICorner", submitFeature1)
 keyCorner.CornerRadius = UDim.new(0, 8)
 
 local submitFeature2 = Instance.new("TextButton", mainFrame)
-submitFeature2.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature2.Position = UDim2.new(0, 0, 0.70, 0)
+submitFeature2.Size = UDim2.new(1, 0, 0, 30)
+submitFeature2.Position = UDim2.new(0, 0, 0.75, 0)
 submitFeature2.Text = "Mount Lembayana"
 submitFeature2.TextSize = 18
 submitFeature2.Font = Enum.Font.GothamBold
