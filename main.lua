@@ -32,7 +32,7 @@ end
 
 
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "🐸"
+gui.Name = "CyberFrog"
 gui.ResetOnSpawn = false
 
 
@@ -101,7 +101,7 @@ local iconBtn = Instance.new("TextButton", gui)
 iconBtn.Size = UDim2.new(0, 90, 0, 40)
 iconBtn.Position = UDim2.new(1, -110, 1, -80)
 iconBtn.BackgroundColor3 = Color3.fromRGB(123, 104, 238)
-iconBtn.Text = "🐸"
+iconBtn.Text = "CyberFrog"
 iconBtn.TextSize = 18
 iconBtn.TextColor3 = Color3.fromRGB(255,255,255)
 iconBtn.Font = Enum.Font.GothamBold
