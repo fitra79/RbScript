@@ -186,8 +186,12 @@ submitCorner.CornerRadius = UDim.new(0, 10)
 -- ==============================
 
 submitBtn.MouseButton1Click:Connect(function()
-    local inputKey = keyBox.Text
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
+    local key = keyBox.Text
+    if key == "admin" then
+        print("Key valid: Access granted")
+        frame.Visible = false
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
+    else
+        print("Key invalid:", key)
     end
 end)
