@@ -167,12 +167,12 @@ Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
 
 -- ==============================
 
-submitFeature1.MouseButton1Click:Connect(function()
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/WataX.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
-    end
-end)
+-- submitFeature1.MouseButton1Click:Connect(function()
+--     mainFrame.Visible = false
+--     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/WataX.lua"))()
+--     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
+--     end
+-- end)
 
 -- submitFeature2.MouseButton1Click:Connect(function()
 --     mainFrame.Visible = false
@@ -186,3 +186,39 @@ end)
 --     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/mainmap991.lua"))()
 --     end
 -- end)
+
+-- Function reusable untuk jalankan 1 atau 2 link
+local function runLoader(urls)
+    mainFrame.Visible = false
+    for _, url in ipairs(urls) do
+        local success, result = pcall(function()
+            return loadstring(game:HttpGet(url))()
+        end)
+        if not success then
+            warn("Gagal load:", url)
+        end
+    end
+end
+
+-- Tombol: Mount Atin
+submitFeature1.MouseButton1Click:Connect(function()
+    runLoader({
+        "https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/WataX.lua",
+        "https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"
+    })
+end)
+
+-- Tombol: Mount Lembayana
+submitFeature2.MouseButton1Click:Connect(function()
+    runLoader({
+        "https://raw.githubusercontent.com/WataXScript/WataXMountLembayana/main/Loader/mainmap993.lua"
+    })
+end)
+
+-- Tombol: Mount Arunika
+submitFeature3.MouseButton1Click:Connect(function()
+    runLoader({
+        "https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/WataX.lua",
+        "https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/mainmap991.lua"
+    })
+end)
