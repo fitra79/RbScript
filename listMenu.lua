@@ -173,16 +173,3 @@ submitFeature1.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
     end
 end)
-
-submitFeature2.MouseButton1Click:Connect(function()
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountLembayana/main/Loader/mainmap993.lua"))()
-    end
-end)
-
-submitFeature3.MouseButton1Click:Connect(function()
-    mainFrame.Visible = false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/WataX.lua"))()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/mainmap991.lua"))()
-    end
-end)
