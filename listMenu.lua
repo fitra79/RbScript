@@ -140,30 +140,28 @@ submitFeature1.TextSize = 18
 submitFeature1.Font = Enum.Font.GothamBold
 submitFeature1.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature1.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-local keyCorner = Instance.new("UICorner", submitFeature1)
-keyCorner.CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", submitFeature1).CornerRadius = UDim.new(0, 8)
 
 local submitFeature2 = Instance.new("TextButton", mainFrame)
 submitFeature2.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature2.Position = UDim2.new(0.1, 0, 0.50, 0)
+submitFeature2.Position = UDim2.new(0.1, 0, 0.50, 0) -- geser ke bawah
 submitFeature2.Text = "Mount Lembayana"
 submitFeature2.TextSize = 18
 submitFeature2.Font = Enum.Font.GothamBold
 submitFeature2.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature2.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-local keyCorner = Instance.new("UICorner", submitFeature2)
-keyCorner.CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", submitFeature2).CornerRadius = UDim.new(0, 8)
 
 local submitFeature3 = Instance.new("TextButton", mainFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature3.Position = UDim2.new(0.1, 0, 0.70, 0)
+submitFeature3.Position = UDim2.new(0.1, 0, 0.70, 0) -- lebih bawah lagi
 submitFeature3.Text = "Mount Arunika"
 submitFeature3.TextSize = 18
 submitFeature3.Font = Enum.Font.GothamBold
 submitFeature3.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-local keyCorner = Instance.new("UICorner", submitFeature3)
-keyCorner.CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
+
 
 -- ==============================
 
