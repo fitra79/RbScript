@@ -80,8 +80,12 @@ iconBtn.TextSize = 18
 iconBtn.TextColor3 = Color3.fromRGB(255,255,255)
 iconBtn.Font = Enum.Font.GothamBold
 iconBtn.Visible = false
-Instance.new("UICorner", iconBtn).CornerRadius = UDim.new(0.5, 0)
-Instance.new("UIStroke", iconBtn).Thickness = 1.5
+local iconCorner = Instance.new("UICorner", iconBtn)
+iconCorner.CornerRadius = UDim.new(0.5, 0)
+
+local iconStroke = Instance.new("UIStroke", iconBtn)
+iconStroke.Thickness = 1.5
+iconStroke.Color = Color3.fromRGB(255, 255, 255)
 
 local dragging = false
 local dragInput, dragStart, startPos
@@ -93,7 +97,7 @@ local function update(input)
     )
 end
 iconBtn.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = iconBtn.Position
@@ -105,7 +109,7 @@ iconBtn.InputBegan:Connect(function(input)
     end
 end)
 iconBtn.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
 end)
