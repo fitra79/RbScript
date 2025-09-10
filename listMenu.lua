@@ -135,7 +135,7 @@ end)
 local submitFeature1 = Instance.new("TextButton", mainFrame)
 submitFeature1.Size = UDim2.new(0.8, 0, 0, 40)
 submitFeature1.Position = UDim2.new(0.1, 0, 0.35, 0)
-submitFeature1.Text = "Gunung Atin"
+submitFeature1.Text = "Mount Atin"
 submitFeature1.TextSize = 18
 submitFeature1.Font = Enum.Font.GothamBold
 submitFeature1.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -143,17 +143,27 @@ submitFeature1.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 local keyCorner = Instance.new("UICorner", submitFeature1)
 keyCorner.CornerRadius = UDim.new(0, 8)
 
+local submitFeature2 = Instance.new("TextButton", mainFrame)
+submitFeature2.Size = UDim2.new(0.8, 0, 0, 40)
+submitFeature2.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature2.Text = "Mount Lembayana"
+submitFeature2.TextSize = 18
+submitFeature2.Font = Enum.Font.GothamBold
+submitFeature2.TextColor3 = Color3.fromRGB(0, 0, 0)
+submitFeature2.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+local keyCorner = Instance.new("UICorner", submitFeature2)
+keyCorner.CornerRadius = UDim.new(0, 8)
 
-local submitBtn = Instance.new("TextButton", mainFrame)
-submitBtn.Size = UDim2.new(0.5, 0, 0, 35)
-submitBtn.Position = UDim2.new(0.25, 0, 0.55, 0)
-submitBtn.Text = "Submit"
-submitBtn.TextSize = 18
-submitBtn.Font = Enum.Font.GothamBold
-submitBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 100)
-submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
-local submitCorner = Instance.new("UICorner", submitBtn)
-submitCorner.CornerRadius = UDim.new(0, 10)
+local submitFeature3 = Instance.new("TextButton", mainFrame)
+submitFeature3.Size = UDim2.new(0.8, 0, 0, 40)
+submitFeature3.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature3.Text = "Mount Arunika"
+submitFeature3.TextSize = 18
+submitFeature3.Font = Enum.Font.GothamBold
+submitFeature3.TextColor3 = Color3.fromRGB(0, 0, 0)
+submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+local keyCorner = Instance.new("UICorner", submitFeature3)
+keyCorner.CornerRadius = UDim.new(0, 8)
 
 -- ==============================
 
