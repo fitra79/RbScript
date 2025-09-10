@@ -156,7 +156,7 @@ keyCorner.CornerRadius = UDim.new(0, 8)
 
 local submitFeature3 = Instance.new("TextButton", mainFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature3.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature3.Position = UDim2.new(0.1, 0, 0.70, 0)
 submitFeature3.Text = "Mount Arunika"
 submitFeature3.TextSize = 18
 submitFeature3.Font = Enum.Font.GothamBold
