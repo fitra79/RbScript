@@ -29,7 +29,7 @@ gui.ResetOnSpawn = false
 
 local mainFrame = Instance.new("Frame", gui)
 mainFrame.Size = UDim2.new(0, 250, 0, 175)
-mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+mainFrame.Position = UDim2.new(0.5,-120,0.5,-80)
 mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 mainFrame.BorderSizePixel = 0
 local corner = Instance.new("UICorner", mainFrame)
@@ -163,7 +163,7 @@ keyCorner.CornerRadius = UDim.new(0, 8)
 
 local submitBtn = Instance.new("TextButton", mainFrame)
 submitBtn.Size = UDim2.new(0.5, 0, 0, 35)
-submitBtn.Position = UDim2.new(0.25, 0, 0.30, 0)
+submitBtn.Position = UDim2.new(0.25, 0, 0.45, 0)
 submitBtn.Text = "Submit"
 submitBtn.TextSize = 18
 submitBtn.Font = Enum.Font.GothamBold
