@@ -22,70 +22,65 @@ local function loadKey()
 end
 
 
-local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "CyberFrog"
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "CyberFrogMini"
 gui.ResetOnSpawn = false
 
-
+-- Main Frame
 local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 250, 0, 175)
-mainFrame.Position = UDim2.new(0.5,-120,0.5,-80)
-mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+mainFrame.Size = UDim2.new(0, 300, 0, 180)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
+mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
 mainFrame.BorderSizePixel = 0
-local corner = Instance.new("UICorner", mainFrame)
-corner.CornerRadius = UDim.new(0, 15)
+mainFrame.Active = true
+mainFrame.Draggable = true
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 
-
+-- Gradient
 local gradient = Instance.new("UIGradient", mainFrame)
 gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 130, 180)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(72, 61, 139)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 104, 238))
 }
 gradient.Rotation = 45
 
-
+-- Title Bar
 local titleBar = Instance.new("Frame", mainFrame)
-titleBar.Size = UDim2.new(1, 0, 0, 35)
-titleBar.BackgroundTransparency = 1
+titleBar.Size = UDim2.new(1, 0, 0, 28)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+Instance.new("UICorner", titleBar).CornerRadius = UDim.new(0, 12)
 
 local title = Instance.new("TextLabel", titleBar)
-title.Size = UDim2.new(1, 0, 1, 0)
-title.Text = "CyberFrog 🐸"
+title.Size = UDim2.new(1, -60, 1, 0)
+title.Position = UDim2.new(0, 8, 0, 0)
+title.Text = "🐸 CyberFrog"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.TextSize = 20
+title.TextSize = 15
 title.Font = Enum.Font.GothamBold
 title.BackgroundTransparency = 1
 
-local titleStroke = Instance.new("UIStroke", title)
-titleStroke.Thickness = 1.2
-titleStroke.Color = Color3.fromRGB(0, 0, 0)
-
-
+-- Close Button
 local closeBtn = Instance.new("TextButton", titleBar)
-closeBtn.Size = UDim2.new(0, 30, 0, 30)
-closeBtn.Position = UDim2.new(0, 5, 0.5, -15)
-closeBtn.Text = "X"
-closeBtn.TextSize = 18
+closeBtn.Size = UDim2.new(0, 22, 0, 22)
+closeBtn.Position = UDim2.new(1, -26, 0.5, -11)
+closeBtn.Text = "✖"
+closeBtn.TextSize = 14
 closeBtn.Font = Enum.Font.GothamBold
-closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
 closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
-local closeCorner = Instance.new("UICorner", closeBtn)
-closeCorner.CornerRadius = UDim.new(0, 6)
-closeBtn.MouseButton1Click:Connect(function()
-    gui:Destroy()
-end)
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
-
+-- Minimize Button
 local minBtn = Instance.new("TextButton", titleBar)
-minBtn.Size = UDim2.new(0, 30, 0, 30)
-minBtn.Position = UDim2.new(1, -35, 0.5, -15)
-minBtn.Text = "-"
-minBtn.TextSize = 22
+minBtn.Size = UDim2.new(0, 22, 0, 22)
+minBtn.Position = UDim2.new(1, -52, 0.5, -11)
+minBtn.Text = "–"
+minBtn.TextSize = 18
 minBtn.Font = Enum.Font.GothamBold
 minBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 200)
 minBtn.TextColor3 = Color3.fromRGB(255,255,255)
-local minCorner = Instance.new("UICorner", minBtn)
-minCorner.CornerRadius = UDim.new(0, 6)
+Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 6)
 
 
 local iconBtn = Instance.new("TextButton", gui)
@@ -148,29 +143,28 @@ iconBtn.MouseButton1Click:Connect(function()
 end)
 
 
+-- KeyBox
 local keyBox = Instance.new("TextBox", mainFrame)
-keyBox.Size = UDim2.new(0.8, 0, 0, 40)
-keyBox.Position = UDim2.new(0.1, 0, 0.25, 0)
-keyBox.PlaceholderText = "Enter your key..."
+keyBox.Size = UDim2.new(0.85, 0, 0, 32)
+keyBox.Position = UDim2.new(0.075, 0, 0.38, 0)
+keyBox.PlaceholderText = "Enter key..."
 keyBox.Text = ""
-keyBox.TextSize = 18
+keyBox.TextSize = 14
 keyBox.Font = Enum.Font.Gotham
-keyBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-keyBox.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-local keyCorner = Instance.new("UICorner", keyBox)
-keyCorner.CornerRadius = UDim.new(0, 8)
+keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
+keyBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
 
-
+-- Submit Button
 local submitBtn = Instance.new("TextButton", mainFrame)
-submitBtn.Size = UDim2.new(0.5, 0, 0, 35)
-submitBtn.Position = UDim2.new(0.25, 0, 0.45, 0)
+submitBtn.Size = UDim2.new(0.5, 0, 0, 30)
+submitBtn.Position = UDim2.new(0.25, 0, 0.7, 0)
 submitBtn.Text = "Submit"
-submitBtn.TextSize = 18
+submitBtn.TextSize = 14
 submitBtn.Font = Enum.Font.GothamBold
 submitBtn.BackgroundColor3 = Color3.fromRGB(60, 180, 100)
 submitBtn.TextColor3 = Color3.fromRGB(255,255,255)
-local submitCorner = Instance.new("UICorner", submitBtn)
-submitCorner.CornerRadius = UDim.new(0, 10)
+Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================
 
