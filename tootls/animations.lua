@@ -4,7 +4,10 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 
-local isActive = true
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Config = require(ReplicatedStorage:WaitForChild("ConfigModule"))
+
+local isActive = Config.isActive
 local isBeton = false
 local animConn
 
