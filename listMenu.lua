@@ -180,7 +180,8 @@ end
 -- Tombol: Mount Atin
 submitFeature1.MouseButton1Click:Connect(function()
     runLoader({
-        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua"
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua",
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tootls/animations.lua"
     })
 end)
 
