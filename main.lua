@@ -28,7 +28,7 @@ gui.ResetOnSpawn = false
 
 
 local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 400, 0, 250)
+mainFrame.Size = UDim2.new(0, 250, 0, 250)
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
 mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 mainFrame.BorderSizePixel = 0
@@ -150,7 +150,7 @@ end)
 
 local keyBox = Instance.new("TextBox", mainFrame)
 keyBox.Size = UDim2.new(0.8, 0, 0, 40)
-keyBox.Position = UDim2.new(0.1, 0, 0.35, 0)
+keyBox.Position = UDim2.new(0.1, 0, 0.10, 0)
 keyBox.PlaceholderText = "Enter your key..."
 keyBox.Text = ""
 keyBox.TextSize = 18
