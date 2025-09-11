@@ -153,7 +153,7 @@ Instance.new("UICorner", submitFeature2).CornerRadius = UDim.new(0, 8)
 
 local submitFeature3 = Instance.new("TextButton", mainFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature3.Position = UDim2.new(0.1, 0, 0.70, 0) -- lebih bawah lagi
+submitFeature3.Position = UDim2.new(0.1, 0, 0.60, 0) -- lebih bawah lagi
 submitFeature3.Text = "Mount Arunika"
 submitFeature3.TextSize = 18
 submitFeature3.Font = Enum.Font.GothamBold
