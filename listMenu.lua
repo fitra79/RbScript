@@ -71,7 +71,7 @@ minBtn.TextColor3 = Color3.fromRGB(255,255,255)
 local minCorner = Instance.new("UICorner", minBtn)
 minCorner.CornerRadius = UDim.new(0, 6)
 
-
+--- Start Icon
 local iconBtn = Instance.new("TextButton", gui)
 iconBtn.Size = UDim2.new(0, 90, 0, 40)
 iconBtn.Position = UDim2.new(1, -110, 1, -80)
@@ -131,6 +131,8 @@ iconBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = true
 end)
 
+---- End Icon
+
 
 local submitFeature1 = Instance.new("TextButton", mainFrame)
 submitFeature1.Size = UDim2.new(0.8, 0, 0, 40)
@@ -163,31 +165,6 @@ submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
 
 
--- ==============================
-
--- ==============================
-
--- submitFeature1.MouseButton1Click:Connect(function()
---     mainFrame.Visible = false
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/WataX.lua"))()
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"))()
---     end
--- end)
-
--- submitFeature2.MouseButton1Click:Connect(function()
---     mainFrame.Visible = false
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountLembayana/main/Loader/mainmap993.lua"))()
---     end
--- end)
-
--- submitFeature3.MouseButton1Click:Connect(function()
---     mainFrame.Visible = false
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/WataX.lua"))()
---     loadstring(game:HttpGet("https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/mainmap991.lua"))()
---     end
--- end)
-
--- Function reusable untuk jalankan 1 atau 2 link
 local function runLoader(urls)
     mainFrame.Visible = false
     for _, url in ipairs(urls) do
@@ -203,8 +180,7 @@ end
 -- Tombol: Mount Atin
 submitFeature1.MouseButton1Click:Connect(function()
     runLoader({
-        "https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/WataX.lua",
-        "https://raw.githubusercontent.com/WataXScript/WataXMountAtin/main/Loader/mainmap792.lua"
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua"
     })
 end)
 
