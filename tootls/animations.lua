@@ -4,10 +4,10 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Config = require(ReplicatedStorage:WaitForChild("ConfigModule"))
+-- local ReplicatedStorage = game:GetService("ReplicatedStorage")
+-- local Config = require(ReplicatedStorage:WaitForChild("ConfigModule"))
 
-local isActive = Config.isActive
+local isActive = true
 local isBeton = false
 local animConn
 
@@ -21,7 +21,7 @@ local function setup(char)
     animConn = RunService.RenderStepped:Connect(function(dt)
         if not hrp or not hrp.Parent then return end
 
-        if Config.isActive then
+        if isActive then
             local direction = (hrp.Position - lastPos)
             local dist = direction.Magnitude
             if dist > 0.01 then
