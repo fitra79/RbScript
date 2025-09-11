@@ -1,6 +1,6 @@
 local Config = {}
 
-Config.isActive = false
+Config.isActive = true
 Config.isBeton = false
 
 return Config
