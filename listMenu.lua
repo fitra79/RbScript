@@ -1,59 +1,77 @@
--- Simple & Clean Loader UI
+-- Loader Key UI
+
 local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
+
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-gui.Name = "CyberFrogUI"
+gui.Name = "CyberFrog"
 gui.ResetOnSpawn = false
 
--- Main Frame
-local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 350, 0, 220)
-mainFrame.Position = UDim2.new(0.5, -175, 0.5, -110)
-mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
-mainFrame.BorderSizePixel = 0
-Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 
--- Title Bar
+local mainFrame = Instance.new("Frame", gui)
+mainFrame.Size = UDim2.new(0, 400, 0, 250)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+mainFrame.BorderSizePixel = 0
+local corner = Instance.new("UICorner", mainFrame)
+corner.CornerRadius = UDim.new(0, 15)
+
+
+local gradient = Instance.new("UIGradient", mainFrame)
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 130, 180)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 104, 238))
+}
+gradient.Rotation = 45
+
+
 local titleBar = Instance.new("Frame", mainFrame)
 titleBar.Size = UDim2.new(1, 0, 0, 35)
-titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
-Instance.new("UICorner", titleBar).CornerRadius = UDim.new(0, 12)
+titleBar.BackgroundTransparency = 1
 
 local title = Instance.new("TextLabel", titleBar)
-title.Size = UDim2.new(1, -70, 1, 0)
-title.Position = UDim2.new(0, 10, 0, 0)
-title.Text = "🐸 CyberFrog Loader"
+title.Size = UDim2.new(1, 0, 1, 0)
+title.Text = "CyberFrog 🐸"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.TextSize = 18
+title.TextSize = 20
 title.Font = Enum.Font.GothamBold
 title.BackgroundTransparency = 1
 
--- Close Button
+local titleStroke = Instance.new("UIStroke", title)
+titleStroke.Thickness = 1.2
+titleStroke.Color = Color3.fromRGB(0, 0, 0)
+
+
 local closeBtn = Instance.new("TextButton", titleBar)
-closeBtn.Size = UDim2.new(0, 28, 0, 28)
-closeBtn.Position = UDim2.new(1, -35, 0.5, -14)
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(0, 5, 0.5, -15)
 closeBtn.Text = "X"
-closeBtn.TextSize = 16
+closeBtn.TextSize = 18
 closeBtn.Font = Enum.Font.GothamBold
-closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+local closeCorner = Instance.new("UICorner", closeBtn)
+closeCorner.CornerRadius = UDim.new(0, 6)
 closeBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
--- Minimize Button
+
 local minBtn = Instance.new("TextButton", titleBar)
-minBtn.Size = UDim2.new(0, 28, 0, 28)
-minBtn.Position = UDim2.new(1, -70, 0.5, -14)
-minBtn.Text = "–"
-minBtn.TextSize = 18
+minBtn.Size = UDim2.new(0, 30, 0, 30)
+minBtn.Position = UDim2.new(1, -35, 0.5, -15)
+minBtn.Text = "-"
+minBtn.TextSize = 22
 minBtn.Font = Enum.Font.GothamBold
 minBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 200)
 minBtn.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 6)
+local minCorner = Instance.new("UICorner", minBtn)
+minCorner.CornerRadius = UDim.new(0, 6)
 
+--- Start Icon
 local iconBtn = Instance.new("TextButton", gui)
 iconBtn.Size = UDim2.new(0, 90, 0, 40)
 iconBtn.Position = UDim2.new(1, -110, 1, -80)
@@ -115,9 +133,10 @@ end)
 
 ---- End Icon
 
+
 local submitFeature1 = Instance.new("TextButton", mainFrame)
 submitFeature1.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature1.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature1.Position = UDim2.new(0.1, 0, 0.30, 0)
 submitFeature1.Text = "Mount Atin"
 submitFeature1.TextSize = 18
 submitFeature1.Font = Enum.Font.GothamBold
@@ -127,7 +146,7 @@ Instance.new("UICorner", submitFeature1).CornerRadius = UDim.new(0, 8)
 
 local submitFeature2 = Instance.new("TextButton", mainFrame)
 submitFeature2.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature2.Position = UDim2.new(0.1, 0, 0.55, 0) -- geser ke bawah
+submitFeature2.Position = UDim2.new(0.1, 0, 0.50, 0) -- geser ke bawah
 submitFeature2.Text = "Mount Lembayana"
 submitFeature2.TextSize = 18
 submitFeature2.Font = Enum.Font.GothamBold
@@ -137,14 +156,13 @@ Instance.new("UICorner", submitFeature2).CornerRadius = UDim.new(0, 8)
 
 local submitFeature3 = Instance.new("TextButton", mainFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 40)
-submitFeature3.Position = UDim2.new(0.1, 0, 0.75, 0) -- lebih bawah lagi
+submitFeature3.Position = UDim2.new(0.1, 0, 0.70, 0) -- lebih bawah lagi
 submitFeature3.Text = "Mount Arunika"
 submitFeature3.TextSize = 18
 submitFeature3.Font = Enum.Font.GothamBold
 submitFeature3.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
-
 
 
 local function runLoader(urls)
