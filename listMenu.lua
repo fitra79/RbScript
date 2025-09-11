@@ -133,7 +133,7 @@ end)
 
 local submitFeature1 = Instance.new("TextButton", mainFrame)
 submitFeature1.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature1.Position = UDim2.new(0.1, 0, 0.35, 0)
+submitFeature1.Position = UDim2.new(0.1, 0, 0.25, 0)
 submitFeature1.Text = "Mount Atin"
 submitFeature1.TextSize = 18
 submitFeature1.Font = Enum.Font.GothamBold
@@ -143,7 +143,7 @@ Instance.new("UICorner", submitFeature1).CornerRadius = UDim.new(0, 8)
 
 local submitFeature2 = Instance.new("TextButton", mainFrame)
 submitFeature2.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature2.Position = UDim2.new(0.1, 0, 0.50, 0) -- geser ke bawah
+submitFeature2.Position = UDim2.new(0.1, 0, 0.45, 0) -- geser ke bawah
 submitFeature2.Text = "Mount Lembayana"
 submitFeature2.TextSize = 18
 submitFeature2.Font = Enum.Font.GothamBold
