@@ -21,7 +21,7 @@ local function setup(char)
     animConn = RunService.RenderStepped:Connect(function(dt)
         if not hrp or not hrp.Parent then return end
 
-        if isActive then
+        if Config.isActive then
             local direction = (hrp.Position - lastPos)
             local dist = direction.Magnitude
             if dist > 0.01 then
