@@ -21,22 +21,23 @@ local function loadKey()
     end
 end
 
-local function getMacAddress()
-    if io and io.popen then
-        local handle = io.popen("ifconfig | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | head -1")
-        local result = handle:read("*a")
-        handle:close()
-
-        result = result:gsub("%s+", "") -- Hapus whitespace
-        if result ~= "" then
-            print("Alamat MAC: " .. result)
-            return result
+-- =====================
+-- Validate Key via tokens.json from GitHub
+-- =====================
+local function isKeyValid(key)
+    local url = "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json" -- ganti sesuai repo
+    local success, data = pcall(function()
+        return game:HttpGet(url)
+    end)
+    if success and data then
+        local json = HttpService:JSONDecode(data)
+        for _, token in ipairs(json.tokens or {}) do
+            if token == key then
+                return true
+            end
         end
     end
-    -- Fallback Roblox-safe: generate pseudo MAC
-    local fallback = HttpService:GenerateGUID(false)
-    print("Fallback pseudo-MAC: " .. fallback)
-    return fallback
+    return false
 end
 
 
@@ -166,7 +167,7 @@ local keyBox = Instance.new("TextBox", mainFrame)
 keyBox.Size = UDim2.new(0.85, 0, 0, 32)
 keyBox.Position = UDim2.new(0.075, 0, 0.38, 0)
 keyBox.PlaceholderText = "Enter key..."
-keyBox.Text = getMacAddress() or "Tidak ada"
+keyBox.Text = isKeyValid("abcd")
 keyBox.TextSize = 14
 keyBox.Font = Enum.Font.Gotham
 keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
