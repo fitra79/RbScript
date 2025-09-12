@@ -10810,7 +10810,7 @@ gui.ResetOnSpawn = false
 
 -- Main Frame
 local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 300, 0, 180)
+mainFrame.Size = UDim2.new(0, 300, 0, 370)
 mainFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
 mainFrame.BorderSizePixel = 0
@@ -10834,7 +10834,7 @@ titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
 local title = Instance.new("TextLabel", titleBar)
 title.Size = UDim2.new(1, -60, 1, 0)
 title.Position = UDim2.new(0, 8, 0, 0)
-title.Text = "🐸 CyberFrog - Ravika"
+title.Text = "🐸 CyberFrog - Atin"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 15
 title.Font = Enum.Font.GothamBold
@@ -10901,7 +10901,7 @@ list.FillDirection = Enum.FillDirection.Vertical
 list.HorizontalAlignment = Enum.HorizontalAlignment.Center
 list.SortOrder = Enum.SortOrder.LayoutOrder
 
--- Start CP
+-- Tombol Start CP
 local startCP = Instance.new("TextButton", buttonHolder)
 startCP.Size = UDim2.new(1, 0, 0, 36)
 startCP.Text = "▶ Start CP"
@@ -10912,7 +10912,7 @@ startCP.TextSize = 18
 Instance.new("UICorner", startCP).CornerRadius = UDim.new(0, 8)
 startCP.MouseButton1Click:Connect(runRouteOnce)
 
--- Stop
+-- Tombol Stop
 local stopBtn = Instance.new("TextButton", buttonHolder)
 stopBtn.Size = UDim2.new(1, 0, 0, 36)
 stopBtn.Text = "⏹ Stop"
@@ -10923,7 +10923,7 @@ stopBtn.TextSize = 18
 Instance.new("UICorner", stopBtn).CornerRadius = UDim.new(0, 8)
 stopBtn.MouseButton1Click:Connect(stopRoute)
 
--- Start All
+-- Tombol Start All
 local startAll = Instance.new("TextButton", buttonHolder)
 startAll.Size = UDim2.new(1, 0, 0, 36)
 startAll.Text = "🚀 Start To End"
@@ -10933,3 +10933,34 @@ startAll.Font = Enum.Font.GothamBold
 startAll.TextSize = 18
 Instance.new("UICorner", startAll).CornerRadius = UDim.new(0, 8)
 startAll.MouseButton1Click:Connect(runAllRoutes)
+
+-- Tombol Back
+local backBtn = Instance.new("TextButton", buttonHolder)
+backBtn.Size = UDim2.new(1, 0, 0, 36)
+backBtn.Text = "🔙 Back"
+backBtn.BackgroundColor3 = Color3.fromRGB(241, 196, 15)
+backBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+backBtn.Font = Enum.Font.GothamBold
+backBtn.TextSize = 18
+Instance.new("UICorner", backBtn).CornerRadius = UDim.new(0, 8)
+
+-- Action for Back Button
+backBtn.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
+end)
+
+-- Update ukuran frame dan posisinya agar selalu di tengah
+local function updateFrameSize()
+    local totalHeight = 0
+    for _, button in pairs({startCP, stopBtn, startAll, backBtn}) do
+        totalHeight = totalHeight + button.Size.Y.Offset + 8
+    end
+    local newHeight = totalHeight + 45
+    mainFrame.Size = UDim2.new(0, 300, 0, newHeight)
+    
+    -- Posisi di tengah
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -newHeight/2)
+end
+
+updateFrameSize()
