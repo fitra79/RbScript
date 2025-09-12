@@ -191,7 +191,6 @@ end)
 -- Tombol: Mount Arunika
 submitFeature3.MouseButton1Click:Connect(function()
     runLoader({
-        "https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/WataX.lua",
-        "https://raw.githubusercontent.com/WataXScript/WataXMountArunika/main/Loader/mainmap991.lua"
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/arunika.lua"
     })
 end)
