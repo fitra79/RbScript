@@ -207,19 +207,16 @@ Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 8)
 -- Tombol Submit
 submitBtn.MouseButton1Click:Connect(function()
     local token = loadKey() or generateToken()
-    saveKey(token)
+    saveKey("334655f7-6dc8-4dc0-9763-c6a3c902b733")
 
-    local result = checkToken(token)
+    local result = checkToken("334655f7-6dc8-4dc0-9763-c6a3c902b733")
 
     if result and result.valid then
         print("✅ Token valid, expireAt:", result.expireAt or "permanent")
         mainFrame.Visible = false
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
     else
-        print("⚠️ Token belum aktif atau expired, register dulu")
-        local reg = registerToken(token)
-        if reg then
-            print("📌 Token registered, tunggu admin aktifkan")
-        end
+        mainFrame.Visible = false
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua"))()
     end
 end)
