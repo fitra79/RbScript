@@ -160,7 +160,7 @@ end
 -- Membuat tombol-tombol di dalam scroll frame
 local submitFeature1 = createButton("Mount Atin")
 local submitFeature2 = createButton("Mount Lembayana")
-local submitFeature3 = createButton("Mount Arunika")
+local submitFeature3 = createButton("Mount Aruka")
 local submitFeature4 = createButton("Mount Daun")
 local submitFeature5 = createButton("Mount Ravika")
 
