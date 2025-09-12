@@ -10271,172 +10271,124 @@ local function stopRoute()
 end
 
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "WataXReplay"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = game.CoreGui
+-- ======================================
+-- GUI (perbaikan)
+-- ======================================
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "CyberFrogMini"
+gui.ResetOnSpawn = false
 
-local frame = Instance.new("Frame",screenGui)
-frame.Size = UDim2.new(0,280,0,180)
-frame.Position = UDim2.new(0.5,-140,0.5,-90)
-frame.BackgroundColor3 = Color3.fromRGB(35,35,40)
-frame.Active = true
-frame.Draggable = true
-frame.BackgroundTransparency = 0.05
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0,12)
+-- Main Frame
+local mainFrame = Instance.new("Frame", gui)
+mainFrame.Size = UDim2.new(0, 300, 0, 180)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
+mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 
-local title = Instance.new("TextLabel",frame)
-title.Size = UDim2.new(1,0,0,32)
-title.Text = "WataX Menu"
-title.BackgroundColor3 = Color3.fromRGB(55,55,65)
-title.TextColor3 = Color3.fromRGB(255,255,255)
+-- Gradient
+local gradient = Instance.new("UIGradient", mainFrame)
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(72, 61, 139)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(123, 104, 238))
+}
+gradient.Rotation = 45
+
+-- Title Bar
+local titleBar = Instance.new("Frame", mainFrame)
+titleBar.Size = UDim2.new(1, 0, 0, 28)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+
+local title = Instance.new("TextLabel", titleBar)
+title.Size = UDim2.new(1, -60, 1, 0)
+title.Position = UDim2.new(0, 8, 0, 0)
+title.Text = "🐸 CyberFrog"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 15
 title.Font = Enum.Font.GothamBold
-title.TextScaled = true
-Instance.new("UICorner", title).CornerRadius = UDim.new(0,12)
+title.BackgroundTransparency = 1
+title.TextXAlignment = Enum.TextXAlignment.Left
 
-local startCP = Instance.new("TextButton",frame)
-startCP.Size = UDim2.new(0.5,-7,0,42)
-startCP.Position = UDim2.new(0,5,0,44)
-startCP.Text = "Start CP"
-startCP.BackgroundColor3 = Color3.fromRGB(60,200,80)
-startCP.TextColor3 = Color3.fromRGB(255,255,255)
-startCP.Font = Enum.Font.GothamBold
-startCP.TextScaled = true
-Instance.new("UICorner", startCP).CornerRadius = UDim.new(0,10)
-startCP.MouseButton1Click:Connect(runRouteOnce)
-
-local stopBtn = Instance.new("TextButton",frame)
-stopBtn.Size = UDim2.new(0.5,-7,0,42)
-stopBtn.Position = UDim2.new(0.5,2,0,44)
-stopBtn.Text = "Stop"
-stopBtn.BackgroundColor3 = Color3.fromRGB(220,70,70)
-stopBtn.TextColor3 = Color3.fromRGB(255,255,255)
-stopBtn.Font = Enum.Font.GothamBold
-stopBtn.TextScaled = true
-Instance.new("UICorner", stopBtn).CornerRadius = UDim.new(0,10)
-stopBtn.MouseButton1Click:Connect(stopRoute)
-
-local startAll = Instance.new("TextButton",frame)
-startAll.Size = UDim2.new(1,-10,0,42)
-startAll.Position = UDim2.new(0,5,0,96)
-startAll.Text = "Start To End"
-startAll.BackgroundColor3 = Color3.fromRGB(70,120,220)
-startAll.TextColor3 = Color3.fromRGB(255,255,255)
-startAll.Font = Enum.Font.GothamBold
-startAll.TextScaled = true
-Instance.new("UICorner", startAll).CornerRadius = UDim.new(0,10)
-startAll.MouseButton1Click:Connect(runAllRoutes)
-
-
-local closeBtn = Instance.new("TextButton", frame)
-closeBtn.Size = UDim2.new(0,30,0,30)
-closeBtn.Position = UDim2.new(0,0,0,0)
+-- Close Button
+local closeBtn = Instance.new("TextButton", titleBar)
+closeBtn.Size = UDim2.new(0, 22, 0, 22)
+closeBtn.Position = UDim2.new(1, -26, 0.5, -11)
 closeBtn.Text = "✖"
-closeBtn.BackgroundColor3 = Color3.fromRGB(220,60,60)
-closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
+closeBtn.TextSize = 14
 closeBtn.Font = Enum.Font.GothamBold
-closeBtn.TextScaled = true
-Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0,8)
-closeBtn.MouseButton1Click:Connect(function()
-    if screenGui then screenGui:Destroy() end
-end)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
+-- Minimize Button
+local minBtn = Instance.new("TextButton", titleBar)
+minBtn.Size = UDim2.new(0, 22, 0, 22)
+minBtn.Position = UDim2.new(1, -52, 0.5, -11)
+minBtn.Text = "–"
+minBtn.TextSize = 18
+minBtn.Font = Enum.Font.GothamBold
+minBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 200)
+minBtn.TextColor3 = Color3.fromRGB(255,255,255)
+Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 6)
 
-local miniBtn = Instance.new("TextButton", frame)
-miniBtn.Size = UDim2.new(0,30,0,30)
-miniBtn.Position = UDim2.new(1,-30,0,0)
-miniBtn.Text = "—"
-miniBtn.BackgroundColor3 = Color3.fromRGB(80,80,200)
-miniBtn.TextColor3 = Color3.fromRGB(255,255,255)
-miniBtn.Font = Enum.Font.GothamBold
-miniBtn.TextScaled = true
-Instance.new("UICorner", miniBtn).CornerRadius = UDim.new(0,8)
-
-local bubbleBtn = Instance.new("TextButton", screenGui)
-bubbleBtn.Size = UDim2.new(0,80,0,46)
-bubbleBtn.Position = UDim2.new(0,20,0.7,0)
-bubbleBtn.Text = "WataX"
+-- Bubble
+local bubbleBtn = Instance.new("TextButton", gui)
+bubbleBtn.Size = UDim2.new(0, 90, 0, 40)
+bubbleBtn.Position = UDim2.new(0, 20, 0.7, 0)
+bubbleBtn.Text = "CyberFrog"
 bubbleBtn.BackgroundColor3 = Color3.fromRGB(0,140,220)
 bubbleBtn.TextColor3 = Color3.fromRGB(255,255,255)
 bubbleBtn.Font = Enum.Font.GothamBold
-bubbleBtn.TextScaled = true
+bubbleBtn.TextSize = 16
 bubbleBtn.Visible = false
 bubbleBtn.Active = true
 bubbleBtn.Draggable = true
 Instance.new("UICorner", bubbleBtn).CornerRadius = UDim.new(0,14)
 
-miniBtn.MouseButton1Click:Connect(function()
-    frame.Visible = false
+-- Toggle Minimize
+minBtn.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
     bubbleBtn.Visible = true
 end)
+
 bubbleBtn.MouseButton1Click:Connect(function()
-    frame.Visible = true
+    mainFrame.Visible = true
     bubbleBtn.Visible = false
 end)
 
+-- Container untuk tombol
+local buttonHolder = Instance.new("Frame", mainFrame)
+buttonHolder.Size = UDim2.new(1, -20, 1, -40)
+buttonHolder.Position = UDim2.new(0, 10, 0, 35)
+buttonHolder.BackgroundTransparency = 1
 
-local discordBtn = Instance.new("TextButton", frame)
-discordBtn.Size = UDim2.new(0,100,0,30)
-discordBtn.AnchorPoint = Vector2.new(0,1)
-discordBtn.Position = UDim2.new(0,5,1,-5)
-discordBtn.Text = "Discord"
-discordBtn.BackgroundColor3 = Color3.fromRGB(90,90,220)
-discordBtn.TextColor3 = Color3.fromRGB(255,255,255)
-discordBtn.Font = Enum.Font.GothamBold
-discordBtn.TextScaled = true
-Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0,8)
+local list = Instance.new("UIListLayout", buttonHolder)
+list.Padding = UDim.new(0, 8)
+list.FillDirection = Enum.FillDirection.Vertical
+list.HorizontalAlignment = Enum.HorizontalAlignment.Center
+list.SortOrder = Enum.SortOrder.LayoutOrder
 
+-- Start CP
+local startCP = Instance.new("TextButton", buttonHolder)
+startCP.Size = UDim2.new(1, 0, 0, 36)
+startCP.Text = "▶ Start CP"
+startCP.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
+startCP.TextColor3 = Color3.fromRGB(255, 255, 255)
+startCP.Font = Enum.Font.GothamBold
+startCP.TextSize = 18
+Instance.new("UICorner", startCP).CornerRadius = UDim.new(0, 8)
+startCP.MouseButton1Click:Connect(runRouteOnce)
 
-discordBtn.Size = UDim2.new(0,100,0,30)
-discordBtn.AnchorPoint = Vector2.new(0,1)
-discordBtn.Position = UDim2.new(0,5,1,-5)
-
-local speedRow = Instance.new("Frame", frame)
-speedRow.Size = UDim2.new(0,160,0,30)
-speedRow.AnchorPoint = Vector2.new(0,1)
-speedRow.Position = UDim2.new(0,110,1,-5)
-speedRow.BackgroundTransparency = 1
-
-local speedValue = Instance.new("TextLabel", speedRow)
-speedValue.Size = UDim2.new(0,60,1,0)
-speedValue.Position = UDim2.new(0,0,0,0)
-speedValue.BackgroundTransparency = 1
-speedValue.TextColor3 = Color3.fromRGB(220,220,220)
-speedValue.Font = Enum.Font.GothamBold
-speedValue.TextScaled = true
-speedValue.Text = string.format("%.2fx", playbackRate)
-
-local speedDown = Instance.new("TextButton", speedRow)
-speedDown.Size = UDim2.new(0,40,1,0)
-speedDown.Position = UDim2.new(0,65,0,0)
-speedDown.Text = "–"
-speedDown.BackgroundColor3 = Color3.fromRGB(60,60,100)
-speedDown.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", speedDown).CornerRadius = UDim.new(0,8)
-
-local speedUp = Instance.new("TextButton", speedRow)
-speedUp.Size = UDim2.new(0,40,1,0)
-speedUp.Position = UDim2.new(0,110,0,0)
-speedUp.Text = "+"
-speedUp.BackgroundColor3 = Color3.fromRGB(60,60,100)
-speedUp.TextColor3 = Color3.fromRGB(255,255,255)
-Instance.new("UICorner", speedUp).CornerRadius = UDim.new(0,8)
-
-speedDown.MouseButton1Click:Connect(function()
-    playbackRate = math.max(0.25, playbackRate - 0.25)
-    if speedValue and speedValue:IsDescendantOf(game) then
-        speedValue.Text = string.format("%.2fx", playbackRate)
-    end
-end)
-speedUp.MouseButton1Click:Connect(function()
-    playbackRate = math.min(3, playbackRate + 0.25)
-    if speedValue and speedValue:IsDescendantOf(game) then
-        speedValue.Text = string.format("%.2fx", playbackRate)
-    end
-end)
-
-discordBtn.MouseButton1Click:Connect(function()
-    if setclipboard then
-        setclipboard("https://discord.gg/tfNqRQsqHK")
-    end
-end)
+-- Stop
+local stopBtn = Instance.new("TextButton", buttonHolder)
+stopBtn.Size = UDim2.new(1, 0, 0, 36)
+stopBtn.Text = "⏹ Stop"
+stopBtn.BackgroundColor3 = Color3.fromRGB(231, 76, 60)
+stopBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+stopBtn.Font = Enum.Font.GothamBold
+stopBtn.TextSize = 18
+Instance.new("UICorner", stopBtn).CornerRadius = UDim.new(0, 8)
+stopBtn.MouseButton1Click:Connect(stopRoute)
