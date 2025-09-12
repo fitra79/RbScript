@@ -1,4 +1,8 @@
+--// Services
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+
 local player = Players.LocalPlayer
 local hrp = nil
 
@@ -40,6 +44,9 @@ end
 player.CharacterAdded:Connect(setup)
 if player.Character then setup(player.Character) end
 
+-- ======================================
+-- Script 2: CyberFrog Replay
+-- ======================================
 
 local function refreshHRP(char)
     if not char then
