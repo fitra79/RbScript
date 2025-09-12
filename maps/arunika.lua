@@ -10270,7 +10270,6 @@ local function stopRoute()
     isActive = false
 end
 
-
 -- ======================================
 -- GUI (perbaikan)
 -- ======================================
