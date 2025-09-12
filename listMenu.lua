@@ -130,20 +130,21 @@ end)
 
 ---- End Icon
 
+-- Scrolling Frame untuk tombol submit
 local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Size = UDim2.new(1, -20, 1, -80)
 scrollFrame.Position = UDim2.new(0, 10, 0, 40)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.ScrollBarThickness = 8
-scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 scrollFrame.ScrollBarImageTransparency = 1
 
 -- Layout di dalam scroll frame
 local listLayout = Instance.new("UIListLayout", scrollFrame)
 listLayout.Padding = UDim.new(0, 10)
 listLayout.FillDirection = Enum.FillDirection.Vertical
+listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
--- Fungsi untuk membuat tombol di dalam scrolling frame
+-- Fungsi untuk membuat tombol di dalam scroll frame
 local function createButton(text)
     local button = Instance.new("TextButton", scrollFrame)
     button.Size = UDim2.new(1, -20, 0, 36)
@@ -163,6 +164,7 @@ local submitFeature3 = createButton("Mount Arunika")
 local submitFeature4 = createButton("Mount Daun")
 local submitFeature5 = createButton("Mount Ravika")
 
+-- Update canvas size setelah tombol-tombol dibuat
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
 
 -- Fungsi untuk menjalankan skrip berdasarkan klik tombol
