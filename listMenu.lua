@@ -130,28 +130,22 @@ end)
 
 ---- End Icon
 
-
 -- Scrolling Frame for submit buttons
 local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Size = UDim2.new(1, -20, 1, -80) 
-scrollFrame.Position = UDim2.new(0, 10, 0, 40)
+scrollFrame.Position = UDim2.new(0, 10, 0, 40) 
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.ScrollBarThickness = 8
-scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 400)
-Instance.new("UIListLayout", scrollFrame).Padding = UDim.new(0, 10)
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 400) 
+scrollFrame.ScrollBarImageTransparency = 1
 
-local function updateCanvasSize()
-    local totalHeight = 0
-    for _, button in pairs({submitFeature1, submitFeature2, submitFeature3, submitFeature4, submitFeature5}) do
-        totalHeight = totalHeight + button.Size.Y.Offset + 10
-    end
-    scrollFrame.CanvasSize = UDim2.new(0, 0, 0, totalHeight)
-end
 
--- Dynamically create buttons inside the scrolling frame
+local listLayout = Instance.new("UIListLayout", scrollFrame)
+listLayout.Padding = UDim.new(0, 10)
+listLayout.FillDirection = Enum.FillDirection.Vertical
+
 local submitFeature1 = Instance.new("TextButton", scrollFrame)
 submitFeature1.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature1.Position = UDim2.new(0.1, 0, 0, 0)
 submitFeature1.Text = "Mount Atin"
 submitFeature1.TextSize = 18
 submitFeature1.Font = Enum.Font.GothamBold
@@ -161,7 +155,6 @@ Instance.new("UICorner", submitFeature1).CornerRadius = UDim.new(0, 8)
 
 local submitFeature2 = Instance.new("TextButton", scrollFrame)
 submitFeature2.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature2.Position = UDim2.new(0.1, 0, 0, 46)
 submitFeature2.Text = "Mount Lembayana"
 submitFeature2.TextSize = 18
 submitFeature2.Font = Enum.Font.GothamBold
@@ -171,7 +164,6 @@ Instance.new("UICorner", submitFeature2).CornerRadius = UDim.new(0, 8)
 
 local submitFeature3 = Instance.new("TextButton", scrollFrame)
 submitFeature3.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature3.Position = UDim2.new(0.1, 0, 0, 92)
 submitFeature3.Text = "Mount Arunika"
 submitFeature3.TextSize = 18
 submitFeature3.Font = Enum.Font.GothamBold
@@ -181,7 +173,6 @@ Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
 
 local submitFeature4 = Instance.new("TextButton", scrollFrame)
 submitFeature4.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature4.Position = UDim2.new(0.1, 0, 0, 138)
 submitFeature4.Text = "Mount Daun"
 submitFeature4.TextSize = 18
 submitFeature4.Font = Enum.Font.GothamBold
@@ -191,7 +182,6 @@ Instance.new("UICorner", submitFeature4).CornerRadius = UDim.new(0, 8)
 
 local submitFeature5 = Instance.new("TextButton", scrollFrame)
 submitFeature5.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature5.Position = UDim2.new(0.1, 0, 0, 184)
 submitFeature5.Text = "Mount Ravika"
 submitFeature5.TextSize = 18
 submitFeature5.Font = Enum.Font.GothamBold
@@ -199,8 +189,8 @@ submitFeature5.TextColor3 = Color3.fromRGB(0, 0, 0)
 submitFeature5.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
 Instance.new("UICorner", submitFeature5).CornerRadius = UDim.new(0, 8)
 
-
-updateCanvasSize()
+-- Update canvas size after buttons are created
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
 
 -- Function to run scripts based on button click
 local function runLoader(urls)
