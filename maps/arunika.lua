@@ -2,6 +2,45 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local hrp = nil
 
+-- flag
+local isActive = false
+local isBeton = false
+local animConn
+local isRunning = false
+local routes = {}
+
+local function setup(char)
+    local humanoid = char:WaitForChild("Humanoid")
+    local root = char:WaitForChild("HumanoidRootPart")
+    local lastPos = root.Position
+
+    if animConn then animConn:Disconnect() end
+    animConn = RunService.RenderStepped:Connect(function()
+        if not root or not root.Parent then return end
+
+        if isActive then
+            local direction = (root.Position - lastPos)
+            local dist = direction.Magnitude
+            if dist > 0.01 then
+                local moveVector = direction.Unit * math.clamp(dist*5,0,1)
+                humanoid:Move(moveVector,false)
+            else
+                humanoid:Move(Vector3.zero,false)
+            end
+        end
+
+        if isBeton then
+            humanoid.Health = humanoid.MaxHealth
+        end
+
+        lastPos = root.Position
+    end)
+end
+
+player.CharacterAdded:Connect(setup)
+if player.Character then setup(player.Character) end
+
+
 local function refreshHRP(char)
     if not char then
         char = player.Character or player.CharacterAdded:Wait()
@@ -12,9 +51,7 @@ if player.Character then refreshHRP(player.Character) end
 player.CharacterAdded:Connect(refreshHRP)
 
 local frameTime = 1/30
-local playbackRate = 1.0
-local isRunning = false
-local routes = {}
+local playbackRate = 1.25
 
 
 local CP0to1 = {
@@ -10184,6 +10221,7 @@ local function runRouteOnce()
     if #routes == 0 then return end
     if not hrp then refreshHRP() end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("▶ Start CP:", routes[idx][1])
     local frames = routes[idx][2]
@@ -10200,6 +10238,7 @@ local function runAllRoutes()
     if #routes == 0 then return end
     if not hrp then refreshHRP() end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("⏩ Start To End dari:", routes[idx][1])
     for r = idx, #routes do
@@ -10221,6 +10260,7 @@ local function stopRoute()
         print("⏹ Stop ditekan")
     end
     isRunning = false
+    isActive = false
 end
 
 
