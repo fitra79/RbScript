@@ -10,46 +10,33 @@ local HttpService = game:GetService("HttpService")
 -- URL server kamu
 local SERVER_URL = "https://clients-hf3m249yb-mohd-fitra-wahyudis-projects.vercel.app"
 
--- Generate random token
-local function generateToken()
-    return HttpService:GenerateGUID(false)
-end
-
+-- Check token via HttpGet
 local function checkToken(token)
-    local headers = {
-        ["Cookie"] = "_vercel_sso_nonce=TE8hwMDZldbfDtjjHJ2ftvQd"
-    }
-
     local success, response = pcall(function()
-        return HttpService:RequestAsync({
-            Url = SERVER_URL .. "/cek?token=" .. token,
-            Method = "GET",
-            Headers = headers
-        })
+        return game:HttpGet(SERVER_URL .. "/cek?token=" .. token, true)
     end)
 
-    if success and response.Success then
-        return HttpService:JSONDecode(response.Body)
+    if success then
+        local data = HttpService:JSONDecode(response)
+        return data
     else
-        warn("Gagal cek token:", response and response.Body)
+        warn("Gagal cek token:", response)
         return nil
     end
 end
 
+-- Register token via HttpPost
 local function registerToken(token)
     local payload = HttpService:JSONEncode({ token = token })
     local success, response = pcall(function()
-        return syn.request({
-            Url = SERVER_URL .. "/register",
-            Method = "POST",
-            Headers = { ["Content-Type"] = "application/json", ["Cookie"] = "_vercel_sso_nonce=TE8hwMDZldbfDtjjHJ2ftvQd" },
-            Body = payload
-        })
+        return game:HttpPost(SERVER_URL .. "/register", payload, Enum.HttpContentType.ApplicationJson)
     end)
-    if success and response.StatusCode == 200 then
-        return HttpService:JSONDecode(response.Body)
+
+    if success then
+        local data = HttpService:JSONDecode(response)
+        return data
     else
-        warn("Gagal register token:", response and response.Body)
+        warn("Gagal register token:", response)
         return nil
     end
 end
@@ -181,7 +168,7 @@ local keyBox = Instance.new("TextBox", mainFrame)
 keyBox.Size = UDim2.new(0.85, 0, 0, 32)
 keyBox.Position = UDim2.new(0.075, 0, 0.38, 0)
 keyBox.PlaceholderText = "Enter key..."
-keyBox.Text = "334655f7-6dc8-4dc0-9763-c6a3c902b733"
+keyBox.Text = "hello"
 keyBox.TextSize = 14
 keyBox.Font = Enum.Font.Gotham
 keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
@@ -206,10 +193,10 @@ Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 8)
 
 -- Tombol Submit
 submitBtn.MouseButton1Click:Connect(function()
-    local token = loadKey() or generateToken()
-    saveKey("334655f7-6dc8-4dc0-9763-c6a3c902b733")
+    local token = keyBox.Text ~= "" and keyBox.Text or generateToken()
+    saveKey(token)
 
-    local result = checkToken("334655f7-6dc8-4dc0-9763-c6a3c902b733")
+    local result = checkToken(token)
 
     if result and result.valid then
         print("✅ Token valid, expireAt:", result.expireAt or "permanent")
