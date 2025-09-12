@@ -6,6 +6,9 @@ local player = Players.LocalPlayer
 local hrp = nil
 
 -- flag
+local isActive = false
+local isBeton = false
+local animConn
 local isRunning = false
 local routes = {}
 
