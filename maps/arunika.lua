@@ -10392,3 +10392,14 @@ stopBtn.Font = Enum.Font.GothamBold
 stopBtn.TextSize = 18
 Instance.new("UICorner", stopBtn).CornerRadius = UDim.new(0, 8)
 stopBtn.MouseButton1Click:Connect(stopRoute)
+
+-- Start All
+local startAll = Instance.new("TextButton", buttonHolder)
+startAll.Size = UDim2.new(1, 0, 0, 36)
+startAll.Text = "🚀 Start To End"
+startAll.BackgroundColor3 = Color3.fromRGB(52, 152, 219)
+startAll.TextColor3 = Color3.fromRGB(255, 255, 255)
+startAll.Font = Enum.Font.GothamBold
+startAll.TextSize = 18
+Instance.new("UICorner", startAll).CornerRadius = UDim.new(0, 8)
+startAll.MouseButton1Click:Connect(runAllRoutes)
