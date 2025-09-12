@@ -1,12 +1,50 @@
 -- WataX
 
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+
+-- flag
+local isActive = false
+local isBeton = false
+local animConn
+local isRunning = false
+local routes = {}
+
 local player = Players.LocalPlayer
 local hrp = player.Character and player.Character:WaitForChild("HumanoidRootPart")
 
 local delayTime = 0.04
-local isRunning = false
-local routes = {}
+local function setup(char)
+    local humanoid = char:WaitForChild("Humanoid")
+    local root = char:WaitForChild("HumanoidRootPart")
+    local lastPos = root.Position
+
+    if animConn then animConn:Disconnect() end
+    animConn = RunService.RenderStepped:Connect(function()
+        if not root or not root.Parent then return end
+
+        if isActive then
+            local direction = (root.Position - lastPos)
+            local dist = direction.Magnitude
+            if dist > 0.01 then
+                local moveVector = direction.Unit * math.clamp(dist*5,0,1)
+                humanoid:Move(moveVector,false)
+            else
+                humanoid:Move(Vector3.zero,false)
+            end
+        end
+
+        if isBeton then
+            humanoid.Health = humanoid.MaxHealth
+        end
+
+        lastPos = root.Position
+    end)
+end
+
+player.CharacterAdded:Connect(setup)
+if player.Character then setup(player.Character) end
 
 
 local function parseRoute(str)
@@ -49705,6 +49743,7 @@ end
 local function runRouteOnce()
     if #routes == 0 then return end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("Start CP:", routes[idx][1])
     local route = routes[idx][2]
@@ -49734,6 +49773,7 @@ end
 local function runAllRoutes()
     if #routes == 0 then return end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("Start All dari:", routes[idx][1])
     for r = idx, #routes do
@@ -49763,6 +49803,7 @@ end
 
 local function stopRoute()
     isRunning = false
+    isActive = false
     print("Stop ditekan")
 end
 
