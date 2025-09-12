@@ -10759,6 +10759,7 @@ local function runRouteOnce()
     if #routes == 0 then return end
     if not hrp then refreshHRP() end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("▶ Start CP:", routes[idx][1])
     local frames = routes[idx][2]
@@ -10775,6 +10776,7 @@ local function runAllRoutes()
     if #routes == 0 then return end
     if not hrp then refreshHRP() end
     isRunning = true
+    isActive = true
     local idx = getNearestRoute()
     print("⏩ Start To End dari:", routes[idx][1])
     for r = idx, #routes do
@@ -10796,6 +10798,7 @@ local function stopRoute()
         print("⏹ Stop ditekan")
     end
     isRunning = false
+    isActive = false
 end
 
 -- ======================================

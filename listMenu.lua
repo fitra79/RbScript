@@ -136,18 +136,17 @@ scrollFrame.Position = UDim2.new(0, 10, 0, 40)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.ScrollBarThickness = 8
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-scrollFrame.ScrollBarImageTransparency = 1 -- Hide the scrollbar
+scrollFrame.ScrollBarImageTransparency = 1
 
--- Layout inside scroll frame
+-- Layout di dalam scroll frame
 local listLayout = Instance.new("UIListLayout", scrollFrame)
 listLayout.Padding = UDim.new(0, 10)
 listLayout.FillDirection = Enum.FillDirection.Vertical
 
--- Dynamically create buttons inside the scrolling frame
-local function createButton(text, position)
+-- Fungsi untuk membuat tombol di dalam scrolling frame
+local function createButton(text)
     local button = Instance.new("TextButton", scrollFrame)
-    button.Size = UDim2.new(0.8, 0, 0, 36)
-    button.Position = position
+    button.Size = UDim2.new(1, -20, 0, 36)
     button.Text = text
     button.TextSize = 18
     button.Font = Enum.Font.GothamBold
@@ -157,16 +156,16 @@ local function createButton(text, position)
     return button
 end
 
-local submitFeature1 = createButton("Mount Atin", UDim2.new(0.1, 0, 0, 0))
-local submitFeature2 = createButton("Mount Lembayana", UDim2.new(0.1, 0, 0, 46))
-local submitFeature3 = createButton("Mount Arunika", UDim2.new(0.1, 0, 0, 92))
-local submitFeature4 = createButton("Mount Daun", UDim2.new(0.1, 0, 0, 138))
-local submitFeature5 = createButton("Mount Ravika", UDim2.new(0.1, 0, 0, 184))
+-- Membuat tombol-tombol di dalam scroll frame
+local submitFeature1 = createButton("Mount Atin")
+local submitFeature2 = createButton("Mount Lembayana")
+local submitFeature3 = createButton("Mount Arunika")
+local submitFeature4 = createButton("Mount Daun")
+local submitFeature5 = createButton("Mount Ravika")
 
--- Update canvas size after buttons are created
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
 
--- Function to run scripts based on button click
+-- Fungsi untuk menjalankan skrip berdasarkan klik tombol
 local function runLoader(urls)
     mainFrame.Visible = false
     for _, url in ipairs(urls) do
@@ -174,12 +173,12 @@ local function runLoader(urls)
             return loadstring(game:HttpGet(url))()
         end)
         if not success then
-            warn("Failed to load:", url)
+            warn("Gagal memuat:", url)
         end
     end
 end
 
--- Connect buttons to run scripts
+-- Menghubungkan tombol-tombol untuk menjalankan skrip
 submitFeature1.MouseButton1Click:Connect(function()
     runLoader({
         "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua"
@@ -209,3 +208,4 @@ submitFeature5.MouseButton1Click:Connect(function()
         "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/ravika.lua"
     })
 end)
+
