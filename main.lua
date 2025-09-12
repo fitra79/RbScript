@@ -5,40 +5,38 @@ local TweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
-local HttpService = game:GetService("HttpService")
+local saveFile = "CyberFrog_Key.txt"
 
--- URL server kamu
-local SERVER_URL = "https://clients-hf3m249yb-mohd-fitra-wahyudis-projects.vercel.app"
 
--- Check token via HttpGet
-local function checkToken(token)
-    local success, response = pcall(function()
-        return game:HttpGet(SERVER_URL .. "/cek?token=" .. token, true)
-    end)
+local function saveKey(k)
+    writefile(saveFile, k)
+end
 
-    if success then
-        local data = HttpService:JSONDecode(response)
-        return data
+
+local function loadKey()
+    if isfile(saveFile) then
+        return readfile(saveFile)
     else
-        warn("Gagal cek token:", response)
         return nil
     end
 end
 
--- Register token via HttpPost
-local function registerToken(token)
-    local payload = HttpService:JSONEncode({ token = token })
-    local success, response = pcall(function()
-        return game:HttpPost(SERVER_URL .. "/register", payload, Enum.HttpContentType.ApplicationJson)
-    end)
+local function getMacAddress()
+    if io and io.popen then
+        local handle = io.popen("ifconfig | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | head -1")
+        local result = handle:read("*a")
+        handle:close()
 
-    if success then
-        local data = HttpService:JSONDecode(response)
-        return data
-    else
-        warn("Gagal register token:", response)
-        return nil
+        result = result:gsub("%s+", "") -- Hapus whitespace
+        if result ~= "" then
+            print("Alamat MAC: " .. result)
+            return result
+        end
     end
+    -- Fallback Roblox-safe: generate pseudo MAC
+    local fallback = HttpService:GenerateGUID(false)
+    print("Fallback pseudo-MAC: " .. fallback)
+    return fallback
 end
 
 
@@ -168,7 +166,7 @@ local keyBox = Instance.new("TextBox", mainFrame)
 keyBox.Size = UDim2.new(0.85, 0, 0, 32)
 keyBox.Position = UDim2.new(0.075, 0, 0.38, 0)
 keyBox.PlaceholderText = "Enter key..."
-keyBox.Text = "hello"
+keyBox.Text = getMacAddress() or "Tidak ada"
 keyBox.TextSize = 14
 keyBox.Font = Enum.Font.Gotham
 keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
@@ -191,19 +189,14 @@ Instance.new("UICorner", submitBtn).CornerRadius = UDim.new(0, 8)
 -- ==============================
 
 
--- Tombol Submit
 submitBtn.MouseButton1Click:Connect(function()
-    local token = keyBox.Text ~= "" and keyBox.Text or generateToken()
-    saveKey(token)
-
-    local result = checkToken(token)
-
-    if result and result.valid then
-        print("✅ Token valid, expireAt:", result.expireAt or "permanent")
+    local key = keyBox.Text
+    if key == "admin" then
+        print("Key valid: Access granted")
+        saveKey(key)
         mainFrame.Visible = false
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
     else
-        mainFrame.Visible = false
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/atin.lua"))()
+        print("Key invalid:", key)
     end
 end)
