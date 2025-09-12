@@ -130,64 +130,38 @@ end)
 
 ---- End Icon
 
--- Scrolling Frame for submit buttons
 local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
-scrollFrame.Size = UDim2.new(1, -20, 1, -80) 
-scrollFrame.Position = UDim2.new(0, 10, 0, 40) 
+scrollFrame.Size = UDim2.new(1, -20, 1, -80)
+scrollFrame.Position = UDim2.new(0, 10, 0, 40)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.ScrollBarThickness = 8
-scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 400) 
-scrollFrame.ScrollBarImageTransparency = 1
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.ScrollBarImageTransparency = 1 -- Hide the scrollbar
 
-
+-- Layout inside scroll frame
 local listLayout = Instance.new("UIListLayout", scrollFrame)
 listLayout.Padding = UDim.new(0, 10)
 listLayout.FillDirection = Enum.FillDirection.Vertical
 
-local submitFeature1 = Instance.new("TextButton", scrollFrame)
-submitFeature1.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature1.Text = "Mount Atin"
-submitFeature1.TextSize = 18
-submitFeature1.Font = Enum.Font.GothamBold
-submitFeature1.TextColor3 = Color3.fromRGB(0, 0, 0)
-submitFeature1.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", submitFeature1).CornerRadius = UDim.new(0, 8)
+-- Dynamically create buttons inside the scrolling frame
+local function createButton(text, position)
+    local button = Instance.new("TextButton", scrollFrame)
+    button.Size = UDim2.new(0.8, 0, 0, 36)
+    button.Position = position
+    button.Text = text
+    button.TextSize = 18
+    button.Font = Enum.Font.GothamBold
+    button.TextColor3 = Color3.fromRGB(0, 0, 0)
+    button.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+    Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
+    return button
+end
 
-local submitFeature2 = Instance.new("TextButton", scrollFrame)
-submitFeature2.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature2.Text = "Mount Lembayana"
-submitFeature2.TextSize = 18
-submitFeature2.Font = Enum.Font.GothamBold
-submitFeature2.TextColor3 = Color3.fromRGB(0, 0, 0)
-submitFeature2.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", submitFeature2).CornerRadius = UDim.new(0, 8)
-
-local submitFeature3 = Instance.new("TextButton", scrollFrame)
-submitFeature3.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature3.Text = "Mount Arunika"
-submitFeature3.TextSize = 18
-submitFeature3.Font = Enum.Font.GothamBold
-submitFeature3.TextColor3 = Color3.fromRGB(0, 0, 0)
-submitFeature3.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", submitFeature3).CornerRadius = UDim.new(0, 8)
-
-local submitFeature4 = Instance.new("TextButton", scrollFrame)
-submitFeature4.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature4.Text = "Mount Daun"
-submitFeature4.TextSize = 18
-submitFeature4.Font = Enum.Font.GothamBold
-submitFeature4.TextColor3 = Color3.fromRGB(0, 0, 0)
-submitFeature4.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", submitFeature4).CornerRadius = UDim.new(0, 8)
-
-local submitFeature5 = Instance.new("TextButton", scrollFrame)
-submitFeature5.Size = UDim2.new(0.8, 0, 0, 36)
-submitFeature5.Text = "Mount Ravika"
-submitFeature5.TextSize = 18
-submitFeature5.Font = Enum.Font.GothamBold
-submitFeature5.TextColor3 = Color3.fromRGB(0, 0, 0)
-submitFeature5.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-Instance.new("UICorner", submitFeature5).CornerRadius = UDim.new(0, 8)
+local submitFeature1 = createButton("Mount Atin", UDim2.new(0.1, 0, 0, 0))
+local submitFeature2 = createButton("Mount Lembayana", UDim2.new(0.1, 0, 0, 46))
+local submitFeature3 = createButton("Mount Arunika", UDim2.new(0.1, 0, 0, 92))
+local submitFeature4 = createButton("Mount Daun", UDim2.new(0.1, 0, 0, 138))
+local submitFeature5 = createButton("Mount Ravika", UDim2.new(0.1, 0, 0, 184))
 
 -- Update canvas size after buttons are created
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
