@@ -21,26 +21,6 @@ local function loadKey()
     end
 end
 
--- =====================
--- Validate Key via tokens.json from GitHub
--- =====================
-local function isKeyValid(key)
-    local url = "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json" -- ganti sesuai repo
-    local success, data = pcall(function()
-        return game:HttpGet(url)
-    end)
-    if success and data then
-        local json = HttpService:JSONDecode(data)
-        for _, token in ipairs(json.tokens or {}) do
-            if token == key then
-                return true
-            end
-        end
-    end
-    return false
-end
-
-
 local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "CyberFrogMini"
 gui.ResetOnSpawn = false
@@ -167,7 +147,7 @@ local keyBox = Instance.new("TextBox", mainFrame)
 keyBox.Size = UDim2.new(0.85, 0, 0, 32)
 keyBox.Position = UDim2.new(0.075, 0, 0.38, 0)
 keyBox.PlaceholderText = "Enter key..."
-keyBox.Text = isKeyValid("abcd")
+keyBox.Text = ""
 keyBox.TextSize = 14
 keyBox.Font = Enum.Font.Gotham
 keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
