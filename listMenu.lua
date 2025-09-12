@@ -184,7 +184,7 @@ end)
 -- Tombol: Mount Lembayana
 submitFeature2.MouseButton1Click:Connect(function()
     runLoader({
-        "https://raw.githubusercontent.com/WataXScript/WataXMountLembayana/main/Loader/mainmap993.lua"
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/lembayana.lua"
     })
 end)
 
