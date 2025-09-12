@@ -12,17 +12,26 @@ local SERVER_URL = "https://clients-hf3m249yb-mohd-fitra-wahyudis-projects.verce
 
 -- Generate random token
 local function generateToken()
-    return HttpService:GenerateGUID(false) -- contoh: "abc123-xyz"
+    return HttpService:GenerateGUID(false)
 end
 
 local function checkToken(token)
+    local headers = {
+        ["Cookie"] = "_vercel_sso_nonce=TE8hwMDZldbfDtjjHJ2ftvQd"
+    }
+
     local success, response = pcall(function()
-        return game:HttpGet(SERVER_URL .. "/cek?token=" .. token)
+        return HttpService:RequestAsync({
+            Url = SERVER_URL .. "/cek?token=" .. token,
+            Method = "GET",
+            Headers = headers
+        })
     end)
-    if success then
-        return HttpService:JSONDecode(response)
+
+    if success and response.Success then
+        return HttpService:JSONDecode(response.Body)
     else
-        warn("Gagal cek token:", response)
+        warn("Gagal cek token:", response and response.Body)
         return nil
     end
 end
@@ -33,7 +42,7 @@ local function registerToken(token)
         return syn.request({
             Url = SERVER_URL .. "/register",
             Method = "POST",
-            Headers = { ["Content-Type"] = "application/json" },
+            Headers = { ["Content-Type"] = "application/json", ["Cookie"] = "_vercel_sso_nonce=TE8hwMDZldbfDtjjHJ2ftvQd" },
             Body = payload
         })
     end)
@@ -210,7 +219,7 @@ submitBtn.MouseButton1Click:Connect(function()
         print("⚠️ Token belum aktif atau expired, register dulu")
         local reg = registerToken(token)
         if reg then
-            print("📌 Token registered, tunggu admin aktifkan:", token)
+            print("📌 Token registered, tunggu admin aktifkan")
         end
     end
 end)
