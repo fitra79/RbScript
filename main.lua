@@ -1,11 +1,10 @@
 -- Services
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
-local UIS = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
 -- File lokal untuk simpan key
-local saveFile = "CyberFrog1_Key.txt"
+local saveFile = "CyberFrog2_Key.txt"
 
 local function saveKey(k)
     writefile(saveFile, k)
@@ -17,59 +16,6 @@ local function loadKey()
     else
         return nil
     end
-end
-
--- Fungsi generate random key (8 karakter)
-local function generateRandomKey(length)
-    local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    local key = ""
-    for i = 1, length do
-        key = key .. chars:sub(math.random(1,#chars), math.random(1,#chars))
-    end
-    return key
-end
-
--- Fungsi cek key di JSON
-local function isKeyValid(key)
-    local success, response = pcall(function()
-        return game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json")
-    end)
-
-    if success then
-        local ok, data = pcall(function()
-            return HttpService:JSONDecode(response)
-        end)
-
-        if ok and data and data.keys then
-            for _, k in pairs(data.keys) do
-                if k.key == key then
-                    return true
-                end
-            end
-        end
-    end
-
-    return false
-end
-
--- Ambil atau buat key
-local function getKey()
-    local savedKey = loadKey()
-    if savedKey then
-        keyLabel.Text = savedKey
-        if isKeyValid(savedKey) then
-            keyLabel.TextColor3 = Color3.fromRGB(60,180,100) -- hijau kalau valid
-        else
-            keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye kalau tidak valid
-        end
-        return
-    end
-
-    -- Jika file belum ada → generate random key dan simpan
-    local newKey = generateRandomKey(8)
-    saveKey(newKey)
-    keyLabel.Text = newKey
-    keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye karena belum tentu valid
 end
 
 ----------------------
@@ -225,5 +171,58 @@ copyBtn.MouseButton1Click:Connect(function()
     setclipboard(keyLabel.Text)
 end)
 
--- Load Key
+-- Fungsi generate random key (12 karakter)
+local function generateRandomKey(length)
+    local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    local key = ""
+    for i = 1, length do
+        key = key .. chars:sub(math.random(1,#chars), math.random(1,#chars))
+    end
+    return key
+end
+
+-- Fungsi cek key di JSON
+local function isKeyValid(key)
+    local success, response = pcall(function()
+        return game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json")
+    end)
+
+    if success then
+        local ok, data = pcall(function()
+            return HttpService:JSONDecode(response)
+        end)
+
+        if ok and data and data.keys then
+            for _, k in pairs(data.keys) do
+                if k.key == key then
+                    return true
+                end
+            end
+        end
+    end
+
+    return false
+end
+
+-- Ambil atau buat key
+local function getKey()
+    local savedKey = loadKey()
+    if savedKey then
+        keyLabel.Text = savedKey
+        if isKeyValid(savedKey) then
+            keyLabel.TextColor3 = Color3.fromRGB(60,180,100) -- hijau kalau valid
+        else
+            keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye kalau tidak valid
+        end
+        return
+    end
+
+    -- Jika file belum ada → generate random key dan simpan
+    local newKey = generateRandomKey(6)
+    saveKey(newKey)
+    keyLabel.Text = newKey
+    keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye karena belum tentu valid
+end
+
+-- Jalankan
 getKey()
