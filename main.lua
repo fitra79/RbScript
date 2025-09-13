@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local player = Players.LocalPlayer
 
 -- File lokal untuk simpan key
-local saveFile = "CyberFrog_Key.txt"
+local saveFile = "testing.txt"
 
 local function saveKey(k)
     writefile(saveFile, k)
