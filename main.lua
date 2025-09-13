@@ -18,13 +18,10 @@ local function loadKey()
     end
 end
 
-----------------------
 -- GUI Setup
-----------------------
-local gui = Instance.new("ScreenGui")
+local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "CyberFrogMini"
 gui.ResetOnSpawn = false
-gui.Parent = game.CoreGui
 
 -- Main Frame
 local mainFrame = Instance.new("Frame", gui)
@@ -46,7 +43,6 @@ gradient.Rotation = 45
 local titleBar = Instance.new("Frame", mainFrame)
 titleBar.Size = UDim2.new(1, 0, 0, 28)
 titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
-titleBar.BorderSizePixel = 0
 Instance.new("UICorner", titleBar).CornerRadius = UDim.new(0, 12)
 
 local title = Instance.new("TextLabel", titleBar)
@@ -81,7 +77,7 @@ minBtn.BackgroundColor3 = Color3.fromRGB(50, 150, 200)
 minBtn.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", minBtn).CornerRadius = UDim.new(0, 6)
 
--- Bubble Icon (Draggable)
+--- Start Icon
 local iconBtn = Instance.new("TextButton", gui)
 iconBtn.Size = UDim2.new(0, 90, 0, 40)
 iconBtn.Position = UDim2.new(1, -110, 1, -80)
@@ -98,7 +94,7 @@ local iconStroke = Instance.new("UIStroke", iconBtn)
 iconStroke.Thickness = 1.5
 iconStroke.Color = Color3.fromRGB(255, 255, 255)
 
--- Dragging Function
+
 local dragging = false
 local dragInput, dragStart, startPos
 local function update(input)
@@ -108,7 +104,6 @@ local function update(input)
         startPos.Y.Scale, startPos.Y.Offset + delta.Y
     )
 end
-
 iconBtn.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
@@ -121,20 +116,18 @@ iconBtn.InputBegan:Connect(function(input)
         end)
     end
 end)
-
 iconBtn.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
 end)
-
 UIS.InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         update(input)
     end
 end)
 
--- Minimize/Restore
+
 minBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
     iconBtn.Visible = true
@@ -143,6 +136,8 @@ iconBtn.MouseButton1Click:Connect(function()
     iconBtn.Visible = false
     mainFrame.Visible = true
 end)
+
+---- End Icon
 
 -- Key Label (Read-only)
 local keyLabel = Instance.new("TextLabel", mainFrame)
@@ -167,6 +162,7 @@ copyBtn.Font = Enum.Font.GothamBold
 copyBtn.TextColor3 = Color3.fromRGB(255,255,255)
 copyBtn.BackgroundColor3 = Color3.fromRGB(60,180,100)
 Instance.new("UICorner", copyBtn).CornerRadius = UDim.new(0,8)
+
 copyBtn.MouseButton1Click:Connect(function()
     setclipboard(keyLabel.Text)
 end)
