@@ -1,8 +1,22 @@
 -- Services
 local Players = game:GetService("Players")
-local UIS = game:GetService("UserInputService")
-local player = Players.LocalPlayer
 local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+
+-- File lokal untuk simpan key
+local saveFile = "CyberFrog_Key.txt"
+
+local function saveKey(k)
+    writefile(saveFile, k)
+end
+
+local function loadKey()
+    if isfile(saveFile) then
+        return readfile(saveFile)
+    else
+        return nil
+    end
+end
 
 -- GUI Setup
 local gui = Instance.new("ScreenGui", game.CoreGui)
@@ -27,17 +41,18 @@ title.Font = Enum.Font.GothamBold
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.BackgroundTransparency = 1
 
--- KeyBox
-local keyBox = Instance.new("TextBox", mainFrame)
-keyBox.Size = UDim2.new(0.85, 0, 0, 32)
-keyBox.Position = UDim2.new(0.075, 0, 0.4, 0)
-keyBox.PlaceholderText = "Your key will appear here..."
-keyBox.Text = ""
-keyBox.TextSize = 14
-keyBox.Font = Enum.Font.Gotham
-keyBox.TextColor3 = Color3.fromRGB(30, 30, 30)
-keyBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
-Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
+-- Key Label (Read-only)
+local keyLabel = Instance.new("TextLabel", mainFrame)
+keyLabel.Size = UDim2.new(0.85, 0, 0, 32)
+keyLabel.Position = UDim2.new(0.075, 0, 0.4, 0)
+keyLabel.Text = "Loading..."
+keyLabel.TextSize = 14
+keyLabel.Font = Enum.Font.Gotham
+keyLabel.TextColor3 = Color3.fromRGB(30, 30, 30)
+keyLabel.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+keyLabel.TextXAlignment = Enum.TextXAlignment.Center
+keyLabel.TextYAlignment = Enum.TextYAlignment.Center
+Instance.new("UICorner", keyLabel).CornerRadius = UDim.new(0, 8)
 
 -- Copy Button
 local copyBtn = Instance.new("TextButton", mainFrame)
@@ -51,30 +66,52 @@ copyBtn.BackgroundColor3 = Color3.fromRGB(60,180,100)
 Instance.new("UICorner", copyBtn).CornerRadius = UDim.new(0,8)
 
 copyBtn.MouseButton1Click:Connect(function()
-    setclipboard(keyBox.Text)
+    setclipboard(keyLabel.Text)
 end)
 
--- Fetch Key from JSON Online
-local function fetchKey()
+-- Fungsi generate random key
+local function generateRandomKey(length)
+    local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    local key = ""
+    for i = 1, length do
+        key = key .. chars:sub(math.random(1, #chars), math.random(1, #chars))
+    end
+    return key
+end
+
+-- Ambil key dari file atau JSON
+local function getKey()
+    -- Cek dulu apakah sudah ada key di file
+    local savedKey = loadKey()
+    if savedKey then
+        keyLabel.Text = savedKey
+        return
+    end
+
+    -- Kalau belum ada, coba ambil dari JSON
     local success, response = pcall(function()
         return game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json")
     end)
 
+    local finalKey
     if success then
-        local data
-        local ok, decode = pcall(function()
-            data = HttpService:JSONDecode(response)
+        local ok, data = pcall(function()
+            return HttpService:JSONDecode(response)
         end)
+
         if ok and data and data.keys and #data.keys > 0 then
-            -- Ambil key pertama saja (tidak semua key)
-            keyBox.Text = data.keys[1].key
+            finalKey = data.keys[1].key -- ambil key pertama dari JSON
         else
-            keyBox.PlaceholderText = "No valid key found"
+            finalKey = generateRandomKey(12) -- JSON kosong, generate sendiri
         end
     else
-        keyBox.PlaceholderText = "Failed to load keys"
+        finalKey = generateRandomKey(12) -- HTTP gagal, generate sendiri
     end
+
+    -- Simpan ke file supaya key tetap sama di lain waktu
+    saveKey(finalKey)
+    keyLabel.Text = finalKey
 end
 
--- Jalankan fetch saat script mulai
-fetchKey()
+
+getKey()
