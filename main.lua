@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local player = Players.LocalPlayer
 
 -- File lokal untuk simpan key
-local saveFile = "CyberFrog2_Key.txt"
+local saveFile = "CyberFrog5_Key.txt"
 
 local function saveKey(k)
     writefile(saveFile, k)
@@ -31,15 +31,33 @@ mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
 mainFrame.BorderSizePixel = 0
 Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 
--- Title
-local title = Instance.new("TextLabel", mainFrame)
-title.Size = UDim2.new(1, 0, 0, 40)
-title.Position = UDim2.new(0, 0, 0, 0)
-title.Text = "🐸 CyberFrog Key"
-title.TextSize = 16
+-- Title Bar
+local titleBar = Instance.new("Frame", mainFrame)
+titleBar.Size = UDim2.new(1, 0, 0, 28)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+titleBar.BorderSizePixel = 0
+Instance.new("UICorner", titleBar).CornerRadius = UDim.new(0, 12)
+
+local title = Instance.new("TextLabel", titleBar)
+title.Size = UDim2.new(1, -60, 1, 0)
+title.Position = UDim2.new(0, 8, 0, 0)
+title.Text = "🐸 CyberFrog"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 15
 title.Font = Enum.Font.GothamBold
-title.TextColor3 = Color3.fromRGB(255,255,255)
 title.BackgroundTransparency = 1
+
+-- Close Button
+local closeBtn = Instance.new("TextButton", titleBar)
+closeBtn.Size = UDim2.new(0, 22, 0, 22)
+closeBtn.Position = UDim2.new(1, -26, 0.5, -11)
+closeBtn.Text = "✖"
+closeBtn.TextSize = 14
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
 -- Key Label (Read-only)
 local keyLabel = Instance.new("TextLabel", mainFrame)
