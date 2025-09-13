@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local player = Players.LocalPlayer
 
 -- File lokal untuk simpan key
-local saveFile = "testing.txt"
+local saveFile = "CyberFrog1_Key.txt"
 
 local function saveKey(k)
     writefile(saveFile, k)
@@ -25,8 +25,8 @@ gui.ResetOnSpawn = false
 
 -- Main Frame
 local mainFrame = Instance.new("Frame", gui)
-mainFrame.Size = UDim2.new(0, 300, 0, 180)
-mainFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
+mainFrame.Size = UDim2.new(0, 300, 0, 150)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
 mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
 mainFrame.BorderSizePixel = 0
 Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
@@ -35,7 +35,7 @@ Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 local title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0, 0, 0, 0)
-title.Text = "🐸 CyberFrog Key Generator"
+title.Text = "🐸 CyberFrog Key"
 title.TextSize = 16
 title.Font = Enum.Font.GothamBold
 title.TextColor3 = Color3.fromRGB(255,255,255)
@@ -69,49 +69,58 @@ copyBtn.MouseButton1Click:Connect(function()
     setclipboard(keyLabel.Text)
 end)
 
--- Fungsi generate random key
+-- Fungsi generate random key (12 karakter)
 local function generateRandomKey(length)
     local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     local key = ""
     for i = 1, length do
-        key = key .. chars:sub(math.random(1, #chars), math.random(1, #chars))
+        key = key .. chars:sub(math.random(1,#chars), math.random(1,#chars))
     end
     return key
 end
 
--- Ambil key dari file atau JSON
-local function getKey()
-    -- Cek dulu apakah sudah ada key di file
-    local savedKey = loadKey()
-    if savedKey then
-        keyLabel.Text = savedKey
-        return
-    end
-
-    -- Kalau belum ada, coba ambil dari JSON
+-- Fungsi cek key di JSON
+local function isKeyValid(key)
     local success, response = pcall(function()
         return game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/tokens.json")
     end)
 
-    local finalKey
     if success then
         local ok, data = pcall(function()
             return HttpService:JSONDecode(response)
         end)
 
-        if ok and data and data.keys and #data.keys > 0 then
-            finalKey = data.keys[1].key -- ambil key pertama dari JSON
-        else
-            finalKey = generateRandomKey(12) -- JSON kosong, generate sendiri
+        if ok and data and data.keys then
+            for _, k in pairs(data.keys) do
+                if k.key == key then
+                    return true
+                end
+            end
         end
-    else
-        finalKey = generateRandomKey(12) -- HTTP gagal, generate sendiri
     end
 
-    -- Simpan ke file supaya key tetap sama di lain waktu
-    saveKey(finalKey)
-    keyLabel.Text = finalKey
+    return false
 end
 
+-- Ambil atau buat key
+local function getKey()
+    local savedKey = loadKey()
+    if savedKey then
+        keyLabel.Text = savedKey
+        if isKeyValid(savedKey) then
+            keyLabel.TextColor3 = Color3.fromRGB(60,180,100) -- hijau kalau valid
+        else
+            keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye kalau tidak valid
+        end
+        return
+    end
 
+    -- Jika file belum ada → generate random key dan simpan
+    local newKey = generateRandomKey(12)
+    saveKey(newKey)
+    keyLabel.Text = newKey
+    keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye karena belum tentu valid
+end
+
+-- Jalankan
 getKey()
