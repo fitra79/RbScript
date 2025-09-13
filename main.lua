@@ -126,7 +126,8 @@ local function getKey()
     if savedKey then
         keyLabel.Text = savedKey
         if isKeyValid(savedKey) then
-            keyLabel.TextColor3 = Color3.fromRGB(60,180,100) -- hijau kalau valid
+            mainFrame.Visible = false
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/listMenu.lua"))()
         else
             keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye kalau tidak valid
         end
