@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 local player = Players.LocalPlayer
 
 -- File lokal untuk simpan key
-local saveFile = "CyberFrog5_Key.txt"
+local saveFile = "CyberFrog10_Key.txt"
 
 local function saveKey(k)
     writefile(saveFile, k)
@@ -134,7 +134,7 @@ local function getKey()
     end
 
     -- Jika file belum ada → generate random key dan simpan
-    local newKey = generateRandomKey(6)
+    local newKey = generateRandomKey(3)
     saveKey(newKey)
     keyLabel.Text = newKey
     keyLabel.TextColor3 = Color3.fromRGB(255,180,0) -- oranye karena belum tentu valid
