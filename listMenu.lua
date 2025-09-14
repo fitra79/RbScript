@@ -160,9 +160,10 @@ end
 -- Membuat tombol-tombol di dalam scroll frame
 local submitFeature1 = createButton("Mount Atin")
 local submitFeature2 = createButton("Mount Lembayana")
-local submitFeature3 = createButton("Mount Aruka")
+local submitFeature3 = createButton("Mount Arunika")
 local submitFeature4 = createButton("Mount Daun")
 local submitFeature5 = createButton("Mount Ravika")
+local submitFeature6 = createButton("Mount Batu")
 
 -- Update canvas size setelah tombol-tombol dibuat
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y)
@@ -211,3 +212,8 @@ submitFeature5.MouseButton1Click:Connect(function()
     })
 end)
 
+submitFeature6.MouseButton1Click:Connect(function()
+    runLoader({
+        "https://raw.githubusercontent.com/fitra79/RbScript/refs/heads/main/maps/batu.lua"
+    })
+end)
