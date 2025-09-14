@@ -6486,6 +6486,7 @@ local function runRouteOnce()
         lerpCF(frames[i], frames[i+1])
     end
     isRunning = false
+    isActive = false
 end
 
 local function runAllRoutes()
