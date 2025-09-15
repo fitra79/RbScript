@@ -10239,6 +10239,7 @@ local function runRouteOnce()
         lerpCF(frames[i], frames[i+1])
     end
     isRunning = false
+    isActive = false
 end
 
 local function runAllRoutes()
@@ -10260,6 +10261,7 @@ local function runAllRoutes()
         end
     end
     isRunning = false
+    isActive = false
 end
 
 local function stopRoute()
@@ -10303,7 +10305,7 @@ titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
 local title = Instance.new("TextLabel", titleBar)
 title.Size = UDim2.new(1, -60, 1, 0)
 title.Position = UDim2.new(0, 8, 0, 0)
-title.Text = "🐸 CyberFrog - Aruka"
+title.Text = "🐸 CyberFrog - Arunika"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextSize = 15
 title.Font = Enum.Font.GothamBold
